@@ -15,8 +15,18 @@ class Score {
     
     // Method
     func setScore(input: String?) {
+        
+        // 1) Check to make sure the text field has a value
         if input != nil {
-            
+            // 2) Use optional binding to check if the value can be cast as an Int
+            if let newScore = Int(input!) {
+                // 3) Check if the Int value is greater than 0 (positive value)
+                if newScore > 0 {
+                    // 4) Set the score property
+                    score = newScore
+                }
+            }
         }
     }
+    
 }

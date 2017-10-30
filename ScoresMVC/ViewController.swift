@@ -33,36 +33,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: UITextField delegate methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        giantsScoreTextField.resignFirstResponder()
-        visitorScoreTextField.resignFirstResponder()
+        // resign responder for the textField that is active
+        textField.resignFirstResponder()
+        
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        // 1) Check which textField has been edited:
+        // Check which textField has been edited:
         if textField == giantsScoreTextField {
-            // 2) Check to make sure the text field has a value
-            if giantsScoreTextField.text != nil {
-                // 3) Use optional binding to check if the value can be cast as an Int
-                if let giantsScore = Int(giantsScoreTextField.text!) {
-                    // 4) Check if the Int value is greater than 0 (positive value)
-                    if giantsScore > 0 {
-                        giantsScoreLabel.text = giantsScoreTextField.text
-                    }
-                }
-            }
+            
+            // update the score property
+            giantsScore.setScore(input: giantsScoreTextField.text)
+            
+            // update the score label
+            giantsScoreLabel.text = String(giantsScore.score)
         }
         
         // Same as above, but for visitorScoreTextField
         if textField == visitorScoreTextField {
-            if visitorScoreTextField.text != nil {
-                if let visitorScore = Int(visitorScoreTextField.text!) {
-                    if visitorScore > 0 {
-                        visitorScoreLabel.text = visitorScoreTextField.text
-                    }
-                }
-            }
+            
+            // update the score property
+            visitorScore.setScore(input: visitorScoreTextField.text)
+            
+            // update the score label
+            visitorScoreLabel.text = String(visitorScore.score)
         }
     }
 
